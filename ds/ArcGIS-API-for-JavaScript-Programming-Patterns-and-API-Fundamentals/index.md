@@ -166,6 +166,16 @@ portal.helperServices.geocode.map(geocoderService => {
 ----
 
 ## Widgets - Styling
+ - Light and dark themes 
+<iframe height="600" style="width: 100%;" scrolling="no" title="Theme Preferences" src="https://codepen.io/kellyhutchins/embed/QWbGGBv?height=265&theme-id=default&default-tab=html,result" frameborder="no" allowtransparency="true" allowfullscreen="true">
+  See the Pen <a href='https://codepen.io/kellyhutchins/pen/QWbGGBv'>Theme Preferences</a> by Kelly Hutchins
+  (<a href='https://codepen.io/kellyhutchins'>@kellyhutchins</a>) on <a href='https://codepen.io'>CodePen</a>.
+</iframe>
+
+
+----
+
+## Widgets - Styling
  - CSS Extension language
  - SASS
  - [Theme Utility](https://github.com/jcfranco/jsapi-styles)
