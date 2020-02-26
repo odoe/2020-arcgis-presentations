@@ -11,12 +11,25 @@ Learn to build powerful applications that integrate the ArcGIS API for JavaScrip
 -->
 
 ----
+
+## ArcGIS API Framework Guides
+
+<a href="https://developers.arcgis.com/javascript/latest/guide/using-frameworks/"><img src="img/wayson/jsapi-frameworks-screenshot.png" class="transparent" height="400" /></a>
+
+
+----
 <!-- .slide: data-background="./../common/slides/section.jpg" -->
 
 ## React
 
 <p><code>ui = f(s)</code></p>
 
+----
+<!-- .slide: data-background="./../common/slides/background.jpg" -->
+
+## ArcGIS API for JavaScript
+
+`🌎 = new F(id, container)`
 
 ----
 
@@ -50,312 +63,57 @@ Learn to build powerful applications that integrate the ArcGIS API for JavaScrip
 ----
 
 <!-- .slide: data-background="../common/slides/background.jpg" class="code-md" data-transition="fade" -->
-### Create a map component that [renders](https://reactjs.org/docs/react-component.html#render) a `<div>`
+### Class-based component
 
 ```jsx
-class EsriMap extends React.Component {
-
-
-
-
-  render() {
-    return <div className="esri-map" />;
-  }
+render() {
+  return <div ref={this.mapDiv} />;
 }
-```
-
-----
-
-<!-- .slide: data-background="../common/slides/background.jpg" class="code-md" data-transition="fade" -->
-### Get a [ref](https://reactjs.org/docs/refs-and-the-dom.html)erence to the `<div>`
-
-```jsx
-class EsriMap extends React.Component {
-  constructor(props) {
-    super(props);
-    this.mapDiv = React.createRef();
-  }
-  render() {
-    return <div className="esri-map" ref={this.mapDiv} />;
-  }
-}
-```
-
-----
-
-<!-- .slide: data-background="../common/slides/background.jpg" class="code-md" data-transition="fade" -->
-### Create a map [after the component renders](https://reactjs.org/docs/react-component.html#componentdidmount)
-
-```jsx
 componentDidMount() {
-  const container = this.mapDiv.current;
-  const basemap = themeToBasemap(this.props.theme);
-  
-  // imported from ./utils/map.js
-  loadMap(container, basemap)
-  .when(view => { this._view = view });
+  this._view = createMapView(this.mapDiv.current, this.props.id);
 }
-```
-
-----
-
-<!-- .slide: data-background="../common/slides/background.jpg" class="code-md" data-transition="fade" -->
-### Handle [updated `theme` (prop)](https://reactjs.org/docs/react-component.html#componentdidupdate)
-
-```jsx
-componentDidUpdate(prevProps) {
-  if (this.props.theme !== prevProps.theme) {
-    if (this._view) {
-      const basemap = themeToBasemap(this.props.theme);
-      this._view.map.basemap = basemap;
-    }
-  }
-}
-```
-
-----
-
-<!-- .slide: data-background="../common/slides/background.jpg" class="code-md" data-transition="fade" -->
-### [Clean up](https://reactjs.org/docs/react-component.html#componentwillunmount)
-
-```jsx
 componentWillUnmount() {
-  if (this._view) {
-    this._view.container = null;
-    delete this._view;
-  }
+  !!this._view && this._view.destroy();
 }
 ```
 
 ----
-
-<!-- .slide: -->
-
-### 🎉 Success! 🎉
-
-<p class="fragment">✅ created a map using React DOM & state</p>
-<p class="fragment">✅ relay state changes state from React to the ArcGIS API</p>
-
-----
-
-<!-- .slide: class="code-md" data-transition="fade" -->
-### 🤔 Relay state changes from ArcGIS API to React?
-
-
-----
-
-<!-- .slide: data-background="../common/slides/background.jpg" class="code-md" data-transition="fade" -->
-### Add `mapLoaded` to App state
-
-```jsx
-class App extends React.Component {
-  state = { theme: 'light', mapLoaded: false }
-
-
-  render() {
-    return <EsriMap theme={theme} />;
-  }
-}
-```
-
-----
-
-<!-- .slide: data-background="../common/slides/background.jpg" class="code-md" data-transition="fade" -->
-### Pass a callback to the map component as a prop
-
-```jsx
-class App extends React.Component {
-  state = { theme: 'light', mapLoaded: false }
-  onMapLoad () => { this.setState({ mapLoaded: true }) }
-
-  render() {
-    return <EsriMap theme={theme} onLoad={onMapLoad} />;
-  }
-}
-```
-
-----
-
-<!-- .slide: data-background="../common/slides/background.jpg" class="code-md" data-transition="fade" -->
-### Call the `onLoad()` callback when the view is ready
-
-```jsx
-componentDidMount() {
-  const container = this.mapDiv.current;
-  const basemap = themeToBasemap(this.props.theme);
-  loadMap(container, basemap).when(view => {
-    this._view = view;
-    this.props.onLoad && this.props.onLoad();
-  });
-}
-```
-
-----
-
-<!-- .slide: -->
-
-### 😒 APIs have changed...
-
-<p class="fragment">... concepts remain the same 🙂</p>
-
-<ul>
-  <li class="fragment">✅ pass `state` & `callbacks` to map component via `props`</li>
-  <li class="fragment">✅ use `refs` to access DOM nodes</li>
-  <li class="fragment">✅ use a module to encapsulate the ArcGIS API</li>
-  <li class="fragment">✅ call functions from that module after render & update</li>
-</li>
-
-----
-
-<!-- .slide: data-background="../common/slides/section.jpg"-->
-
-## Modern React APIs and the ArcGIS API
-
-----
-
-### Manage state in React
-
-* You may not need Redux/MobX
-* Context is powerful, and injectable
-
-----
-
-### React Context API
-
-* Create a Context
-
-```ts
-// main application context
-export const AppContext = createContext<ContextProps>({
-  state: initialState,
-  // add methods to communicate
-  setState: (a: any) => void;
-});
-```
-
-----
-
-### React Context API
-
-* Create a Provider
-
-```tsx
-// main application provider
-export const AppProvider = ({ children }: AppProviderProps) => {
-  ...
-  const value = {
-    state,
-    setState
-  };
-  return (
-      <AppContext.Provider value={value}>
-        {children}
-      </AppContext.Provider>
-  );
-};
-```
-
-----
-
-### React Context API
-
-* Use the Provider
-
-```tsx
-ReactDOM.render(
-    <AppProvider location={location}>
-        <AwesomeApp />
-    </AppProvider>
-  document.getElementById("root")
-);
-```
-
-----
-
-### React Context API
-
-* Use the Context
-
-```tsx
-const AwesomeApp = () => {
-  const mapRef = useRef<HTMLDivElement>(null);
-  const { state, setState } = useContext(AppContext);
-  useEffect(
-    () => {
-      setState(mapRef.current);
-    },
-    []
-  );
-  return (
-    <MapContainer webmapid={state.webmapid} ref={mapRef} />
-  );
-};
-```
-
-----
-
-<!-- .slide: data-background="../common/slides/section.jpg" -->
 
 ## What the hook?
 
-----
-
-### What have I done?
-
-```ts
-const mapRef = useRef<HTMLDivElement>(null);
-const { state, setState } = useContext(AppContext);
-useEffect(
-  () => {
-    setState(mapRef.current);
-  },
-  []
-);
-```
+Write stateful components using functions instead of classes
 
 ----
 
 ### React hooks
 
+* `useRef`
 * `useEffect`
 * `useState`
-* `useContext`
-* and more!
 
-- [documentation](https://reactjs.org/docs/hooks-intro.html)
+and [more](https://reactjs.org/docs/hooks-intro.html)!
 
 ----
 
-### `useEffect`
+<!-- .slide: data-background="../common/slides/background.jpg" class="code-md" data-transition="fade"-->
 
-* Replaces some class lifecycle methods... mostly
-  * componentDidMount
-  * componentDidUpdate
-  * componentWillUnmount
+### `useRef`
 
-----
-
-### `useEffect`
+Get a reference to a DOM node...
 
 ```ts
-let watcher;
-useEffect( // happens after render - EVERY TIME
-  () => {
-    if(watcher) {
-      return;
-    }
-    watcher = mapView.watch("stationary", () => {
-      // do something
-    });
-    return () => watcher.remove();
-  },
-  // when this value changes
-  // rerun this hook
-  [someProp]
-);
+const elRef = useRef(null);
+// later
+const container = elRef.current
 ```
 
+<small class="fragment">
+  ...or _anything_ else that changes outside of React state (view, prev prop values)
+</small>
+
 ----
+
+<!-- .slide: data-background="../common/slides/background.jpg" class="code-md" data-transition="fade"-->
 
 ### `useState`
 
@@ -370,61 +128,99 @@ setReady(true);
 
 ----
 
-### `useState`
+### `useEffect`
 
-```ts
-// You could do objects as well
-const initialState = {
-  selectedFeatures: [],
-  extent: null
-};
-
-const [state, setState] = useState({ ...initialState });
-```
+* Replaces some class lifecycle methods... mostly
+  * `componentDidMount`
+  * `componentDidUpdate`
+  * `componentWillUnmount`
 
 ----
 
-### `useContext`
+### Demo: hooks web map component
 
-* Helps you manage application state
-* _Could_ replace redux/mobx
+<a href="https://developers.arcgis.com/javascript/latest/guide/react/"><img height="400" src="img/wayson/web-map-demo-screenshot.png"></a>
 
 ----
 
-### `useContext`
+<!-- .slide: data-background="../common/slides/background.jpg" class="code-md" data-transition="fade"-->
 
-```tsx
-const AwesomeApp = () => {
-  const mapRef = useRef<HTMLDivElement>(null);
-  const { state } = useContext(AppContext);
-  return (
-    <WebMapComponent webmapid={state.webmapid} />
-  );
-};
-```
+### 🎉 Success! 🎉
+
+<p class="fragment">✅ created a map using a ref to React generated DOM</p>
+<p class="fragment">✅ only destroy `MapView` when unmounting</p>
+
+----
+
+<!-- .slide: data-background="../common/slides/section.jpg" class="code-md" data-transition="fade"-->
+### 🤔 Relay state changes between component and view?
+
+----
+
+<!-- .slide: data-background="img/wayson/React Component and ArcGIS Widget lifecycle-3.png" -->
+
+----
+
+<!-- .slide: data-background="img/wayson/React Component and ArcGIS Widget lifecycle-4.png" -->
+
+----
+
+<!-- .slide: data-background="img/wayson/React Component and ArcGIS Widget lifecycle-5.png" -->
+
+----
+
+<!-- .slide: data-background="../common/slides/section.jpg"-->
+
+## Demo: Location picker
+
+<img class="transparent" height="400" src="img/wayson/location-picker-screenshot.png">
+
+----
+
+<!-- .slide: data-background="../common/slides/background.jpg" -->
+
+### Components that wrap views or widgets
+
+<small class="fragment">... class-based or hooks 🙂</small>
+
+<ul>
+  <li class="fragment">✅ use a `ref` to access the DOM node</li>
+  <li class="fragment">✅ pass parent `state` & `callbacks` to map component via `props`</li>
+  <li class="fragment">✅ use clean-up functions to remove event & watch handlers</li>
+  <li class="fragment">✅ be careful not to destroy the view until unmounting</li>
+</li>
+
+
+----
+
+<!-- .slide: data-background="../common/slides/section.jpg" -->
+## Modern React APIs and the ArcGIS API
+
+----
+
+### Manage global state in React
+
+* You may not need Redux/MobX
+* Context is powerful, and injectable
 
 ----
 
 <!-- .slide: data-background="../common/slides/section.jpg" -->
 
-## Suspense
+### `useContext` hook
 
-----
+```jsx
+import ThemeContext from '.ThemeContext';
 
-## Hold your Suspense
-
-* Lazy-load React components
-* useful in modular apps
-
-```tsx
-import React, { lazy } from "react";
-// lazy load the components that use Maps
-const WebMapView = lazy(() => import("../components/WebMapView"));
-// later on
-<Suspense fallback={<Placeholder />}>
-  <ListView />
-  <WebMapView />
-</Suspense>
+const ThemedMap = () => {
+  const theme = useContext(ThemeContext);
+  const basemap = theme === 'dark'
+    ? 'dark-gray'
+    : 'gray';
+  return (
+    <Map basemap={basemap} />
+  );
+};
 ```
 
 ----
@@ -435,8 +231,9 @@ const WebMapView = lazy(() => import("../components/WebMapView"));
 
 ----
 
-* Do all the API work seperate from your UI
+* Do all the API work separate from your UI
 * _Separate content from navigation_ - pattern in PWAs
+* Mock/stub API in tests
 
 ```ts
 // src/data/map.ts
@@ -453,20 +250,16 @@ export function initialize(element: Element) {
 * Use in your context or component
 
 ```ts
-// src/contexts/App.ts
-const [ container, setContainer ] = useState<HTMLDivElement>(element);
-const loadMap = async () => {
-  // lazy load the API
-  const map = await import("../data/map");
-  map.initialize(container);
-};
+const elRef = useRef(null);
 useEffect(
   () => {
-    if (container) {
-      loadMap();
-    }
+    const loadMap = async (container) => {
+      const map = await import("../data/map");
+      map.initialize(elRef.current);
+    };
+    loadMap();
   },
-  [container]
+  []
 );
 ```
 
@@ -483,17 +276,45 @@ useEffect(
 
 ----
 
+<!-- .slide: data-background="../common/slides/background.jpg" -->
+
+## Suspense
+
+----
+
+## Hold your Suspense
+
+* Lazy-load entire React components
+* useful in modular apps
+
+```tsx
+import React, { lazy, Suspense } from "react";
+// lazy load the components that use Maps
+const WebMapView = lazy(() => import("../components/WebMapView"));
+// later on
+<Suspense  fallback={<div>Loading...</div>}>
+  <WebMapView />
+</Suspense>
+```
+
+## Demo: Location picker w/ lazy load
+
+<img class="transparent" height="400" src="img/wayson/location-picker-screenshot.png">
+
+----
+
 <!-- .slide: data-background="../common/slides/demo.jpg" -->
 
-## Demo
+##  Example: [Nearby JavaScript](https://developers.arcgis.com/example-apps/nearby-javascript/)
 
-* [Nearby JavaScript](https://developers.arcgis.com/example-apps/nearby-javascript/)
+<img class="transparent" src="img/wayson/nearby-featured-image.png">
 
 ----
 
 <!-- .slide: data-background="../common/slides/section.jpg" data-transition="fade" -->
 
 ## 😎 [@arcgis/webpack-plugin](https://github.com/Esri/arcgis-webpack-plugin) 👍
+<p class="fragment">... but</p>
 <p class="fragment">ArcGIS API 4.7+ only</p>
 <p class="fragment">Must be able to configure webpack</p>
 
@@ -561,6 +382,58 @@ useEffect(
 ----
 
 <!-- .slide: data-background="../common/slides/background.jpg" class="code-md" data-transition="fade" -->
+### Works with _any_ React tool / library / framework
+
+<div>
+  <img src="img/wayson/esri.png" class="transparent" height="120" />
+  <img src="img/wayson/Heart_corazon.svg" class="transparent" height="120" />
+  <img src="img/wayson/react-js-img.png" class="transparent" height="120" />
+  <img src="img/wayson/redux-logo.svg" class="transparent" height="120" />
+  <img src="img/wayson/nextjs-white-logo.svg" class="transparent" height="100" />
+  <img src="img/wayson/gatsby-logo.png" class="transparent" height="120" />
+</div>
+
+----
+
+<!-- .slide: data-background="../common/slides/background.jpg" class="code-md" data-transition="fade" -->
+### BTW... <span class="fragment" data-fragment-index="1">Not _just_ for Webpack & React</span>
+
+<div class="fragment" data-fragment-index="1">
+  <img src="img/wayson/webpack-icon-square-big.png" class="transparent" height="120" />
+  <img src="img/wayson/react-js-img.png" class="transparent" height="120" />
+</div>
+
+----
+
+<!-- .slide: data-background="../common/slides/background.jpg" class="code-md" data-transition="fade" -->
+### Works with _any_ module loader
+
+<div>
+  <img src="img/wayson/esri.png" class="transparent" height="120" />
+  <img src="img/wayson/Heart_corazon.svg" class="transparent" height="120" />
+  <img src="img/wayson/webpack-icon-square-big.png" class="transparent" height="120" />
+  <img src="img/wayson/rollup1.png" class="transparent" height="100" />
+  <img src="img/wayson/parcel-og.png" class="transparent" height="140" />
+</div>
+
+----
+
+<!-- .slide: data-background="../common/slides/background.jpg" class="code-md" data-transition="fade" -->
+### Works with _any_ framework
+
+<div>
+  <img src="img/wayson/esri.png" class="transparent" height="120" />
+  <img src="img/wayson/Heart_corazon.svg" class="transparent" height="120" />
+  <img src="img/wayson/tomster-sm.png" class="transparent" height="120" />
+  <img src="img/wayson/angular.png" class="transparent" height="120" />
+  <img src="img/wayson/vue-logo.png" class="transparent" height="120" />
+  <img src="img/wayson/react-js-img.png" class="transparent" height="120" />
+  <img src="img/wayson/Dojo-New.png" class="transparent" height="120" />
+</div>
+
+----
+
+<!-- .slide: data-background="../common/slides/background.jpg" class="code-md" data-transition="fade" -->
 ### Using [esri-loader](https://github.com/Esri/esri-loader#install) with Webpack
 
 <img class="transparent" src="../common/images/800px-Npm-logo.svg.png" style="width: 300px; margin: 110px 0;">
@@ -609,50 +482,16 @@ require([
 ----
 
 <!-- .slide: data-background="../common/slides/background.jpg" class="code-md" data-transition="fade" -->
-### [Lazy loads the ArcGIS API](https://github.com/Esri/esri-loader#lazy-loading-the-arcgis-api-for-javascript) by default
-
-<pre class="language-js" data-line="2,6">
-<code class="language-js">loadModules(["esri/config"]) // <- loads API 1st time
-.then(([esriConfig]) => {
-  esriConfig.useIdentity = false;
-  // don't worry, this won't load the API again!
-  loadModules(
-    ["esri/Map", "esri/views/MapView"],
-  ]).then(([Map, MapView]) => { /* do map things */ });
-});</code></pre>
-
-----
-
-<!-- .slide: data-background="../common/slides/background.jpg" class="code-md" data-transition="fade" -->
-### Lazy load the ArcGIS CSS
-
-<pre class="language-js" data-line="6">
-<code class="language-js">// pass options as a second argument
-loadModules(
-  ["esri/Map", "esri/views/MapView"],
-  // this stylesheet is only loaded once
-  { css: "https://js.arcgis.com/4.10/esri/css/main.css" }
-]).then(([Map, MapView]) => {
-  /* do map things with style! */
-});</code></pre>
-
-Note:
-for even better initial load performance
-
-----
-
-<!-- .slide: data-background="../common/slides/background.jpg" class="code-md" data-transition="fade" -->
 ### [Load a specific version of the ArcGIS API](https://github.com/Esri/esri-loader#from-a-specific-version)
 
 ```js
-const apiUrl = "https://js.arcgis.com/3.30/";
-loadModules(
-  ["esri/map"],
-  {
-    url: apiUrl,
-    css: `${apiUrl}esri/css/esri.css`
-  }
-]).then(([Map]) => { /* do old skool map things */ });
+ // loads API 1st time
+const esriConfig = await loadModules(["esri/config"])
+esriConfig.useIdentity = false;
+// don't worry, this won't load the API again!
+const [Map, MapView] = await loadModules(
+  ["esri/Map", "esri/views/MapView"]
+);
 ```
 
 ----
