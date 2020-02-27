@@ -58,7 +58,7 @@ Enhanced IDE support
 
 ### **Why use TypeScript?**
 </br>
-Makes use of the latest JavaScript features
+Makes use of the latest JavaScript features - async/await
 </br>
 </br>
 <img src="../common/images/promise_async_await_carbon4.png" alt="TypeScript_Example3">
@@ -67,10 +67,28 @@ Makes use of the latest JavaScript features
 
 ### **Why use TypeScript?**
 </br>
-Makes use of the latest JavaScript features
+Makes use of the latest JavaScript features - dynamic module loading
 </br>
 </br>
 <img src="../common/images/dynamicModule2.png" alt="TypeScript_Example4">
+
+----
+
+### **Why use TypeScript?**
+</br>
+Makes use of the latest JavaScript features - optional chaning
+</br>
+</br>
+<img src="../common/images/optional-chaining.png" alt="TypeScript_Example5">
+
+----
+
+### **Why use TypeScript?**
+</br>
+Makes use of the latest JavaScript features - nullish coalescing
+</br>
+</br>
+<img src="../common/images/nullish-coalescing.png" alt="TypeScript_Example6">
 
 ----
 
