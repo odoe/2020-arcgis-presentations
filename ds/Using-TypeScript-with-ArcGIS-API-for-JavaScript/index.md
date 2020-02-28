@@ -76,7 +76,7 @@ Makes use of the latest JavaScript features - dynamic module loading
 
 ### **Why use TypeScript?**
 </br>
-Makes use of the latest JavaScript features - optional chaning
+Makes use of the latest JavaScript features - optional chaining
 </br>
 </br>
 <img src="../common/images/optional-chaining.png" alt="TypeScript_Example5">
@@ -89,6 +89,10 @@ Makes use of the latest JavaScript features - nullish coalescing
 </br>
 </br>
 <img src="../common/images/nullish-coalescing.png" alt="TypeScript_Example6">
+
+----
+### **Why use TypeScript?**
+
 > Types allow me to define where I start and where I want to go. It's about the journey of how I get from one to the other.
 </br>
 
