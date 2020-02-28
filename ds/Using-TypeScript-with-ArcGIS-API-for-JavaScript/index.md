@@ -128,6 +128,10 @@ npm install --save @types/arcgis-js-api
 
 ----
 
+<img src="../common/images/wheres_rene.png" alt="Where is Rene?">
+
+----
+
 ## Tip!
 
 * [ArcGIS API for JavaScript Snippets](https://marketplace.visualstudio.com/items?itemName=Esri.arcgis-jsapi-snippets)
