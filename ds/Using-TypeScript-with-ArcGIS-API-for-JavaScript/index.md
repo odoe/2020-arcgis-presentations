@@ -34,7 +34,7 @@
 
 ### **Developer Setup**
 <a href="https://developers.arcgis.com/javascript/latest/guide/typescript-setup/index.html" target="_blank">
-<img style="float:bottom;" src="../common/images/Setup_TS.png" alt="Setup_TS">
+<img style="float:bottom;" src="../common/images/Setup_TS.png" alt="Setup_TS" height="600">
 </a>
 
 ----
