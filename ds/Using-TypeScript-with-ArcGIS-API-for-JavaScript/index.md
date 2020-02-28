@@ -231,6 +231,12 @@ const layerList = new LayerList({
 
 ----
 
+### **Additional TypeScript Session**
+
+<img style="float:bottom;" src="../common/images/Experience_ArcGISExperienceBuilder.png" alt="ArcGIS Experience Builder: Building Web Solutions, Advanced Topics">
+
+----
+
 <img src="../common/images/esri-science-logo-white.png" style="border: 0px; background:none; box-shadow: none;">
 
 ----
