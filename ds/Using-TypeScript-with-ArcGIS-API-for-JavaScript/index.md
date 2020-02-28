@@ -1,4 +1,4 @@
-<!-- .slide: data-background="../common/images/intro.jpg" -->
+<!-- .slide: data-background="../common/slides/intro.jpg" -->
 <!-- .slide: class="title" -->
 
 <h1 style="text-align: left; font-size: 80px;">Using TypeScript</h1>
@@ -71,6 +71,28 @@ Makes use of the latest JavaScript features
 </br>
 </br>
 <img src="../common/images/dynamicModule2.png" alt="TypeScript_Example4">
+
+----
+
+### **Why use TypeScript?**
+</br>
+> Types allow me to define where I start and where I want to go. It's about the journey of how I get from one to the other.
+</br>
+
+```ts
+type Data = {
+  coordinates: number[];
+  placeName: string;
+};
+
+type Asset = {
+  location: esri.Point;
+  name: string;
+};
+
+type DataToAsset = (a: Data) => Asset;
+
+```
 
 ----
 
