@@ -20,22 +20,155 @@ Do you have a framework of choice for building apps? Learn how to use various fr
 ----
 <!-- .slide: data-background="./../common/slides/section.jpg" -->
 
-## Section
-
-This is an awesome section
-
-----
-
-### Content
-
-This is some awesome content
-
-----
-
-<!-- .slide: data-background="../common/slides/demo.jpg" class="code-md" data-transition="fade" -->
-### Demo
+## Loading the ArcGIS API
 
 ```js
-const coocoocachoo = () => 'I am the walrus!'
+import Map from 'esri/Map';
+import MapView from 'esri/views/MapView';
+// then later inside the mounted/init...
+const map = new Map({
+    basemap: "streets-navigation-vector"
+});
+const view = new MapView({
+    container: element,
+    map,
+    center: [-118.174, 34.024],
+    zoom: 12
+});
 ```
 
+----
+
+### 😎 [@arcgis/webpack-plugin](https://github.com/Esri/arcgis-webpack-plugin) 👍
+<p class="fragment">... but</p>
+<p class="fragment">Must be using webpack 🙄</p>
+<p class="fragment">ArcGIS API 4.7+ only</p>
+<p class="fragment">Must be able to configure webpack</p>
+
+----
+
+<!-- .slide: data-transition="fade" -->
+<p>👵 ArcGIS API < 4.7x? 👴</p>
+<p>🚀 CLI blocks access to webpack config? 🔒</p>
+<p>🙈 Don't _want_ to config webpack? 😱</p>
+
+----
+
+<!-- .slide: data-transition="fade" -->
+###  No problem. Try [esri-loader](https://github.com/Esri/esri-loader)
+
+<div>
+    <img src="img/wayson/esri-loader-band-aid-center-text.png" class="transparent" height="120" />
+</div>
+
+
+----
+
+<!-- .slide: data-transition="fade" -->
+### Works with ArcGIS API [3.x](https://developers.arcgis.com/javascript/3/) <span class="fragment" data-fragment-index="1">_and_ 4.x</span>
+
+<div>
+  <img src="img/wayson/esri.png" class="transparent" height="120" />
+  <img src="img/wayson/esri.png" class="transparent" height="120" />
+  <img src="img/wayson/esri.png" class="transparent" height="120" />
+  <img src="img/wayson/esri.png" class="transparent fragment"  data-fragment-index="1" height="120" />
+</div>
+
+----
+
+<!-- .slide: data-transition="fade" -->
+### Works with _any_ module loader
+
+<div>
+  <img src="img/wayson/esri.png" class="transparent" height="120" />
+  <img src="img/wayson/Heart_corazon.svg" class="transparent" height="120" />
+  <img src="img/wayson/webpack-icon-square-big.png" class="transparent" height="120" />
+  <img src="img/wayson/rollup1.png" class="transparent" height="100" />
+  <img src="img/wayson/parcel-og.png" class="transparent" height="140" />
+</div>
+
+----
+
+<!-- .slide: data-transition="fade" -->
+### Works with _any_ framework
+
+<div>
+  <img src="img/wayson/esri.png" class="transparent" height="120" />
+  <img src="img/wayson/Heart_corazon.svg" class="transparent" height="120" />
+  <img src="img/wayson/tomster-sm.png" class="transparent" height="120" />
+  <img src="img/wayson/angular.png" class="transparent" height="120" />
+  <img src="img/wayson/vue-logo.png" class="transparent" height="120" />
+  <img src="img/wayson/react-js-img.png" class="transparent" height="120" />
+  <img src="img/wayson/Dojo-New.png" class="transparent" height="120" />
+</div>
+
+----
+
+<!-- .slide: data-transition="fade" -->
+### Installing [esri-loader](https://github.com/Esri/esri-loader#install)
+
+<img class="transparent" src="img/wayson/800px-Npm-logo.svg.png" style="width: 300px; margin: 110px 0;">
+<h3><code>npm install --save esri-loader</code></h3>
+
+----
+
+<!-- .slide: data-transition="fade" -->
+### Installing [esri-loader](https://github.com/Esri/esri-loader#install)
+
+<img class="transparent" src="img/wayson/yarn-cat-eating-bower-bird.png">
+<h3><code>yarn add esri-loader</code></h3>
+
+----
+
+<!-- .slide: data-transition="fade" -->
+### Using [`loadModules()`](https://github.com/Esri/esri-loader#usage)
+
+```js
+import { loadModules } from 'esri-loader';
+
+loadModules([
+  "esri/Map",
+  "esri/views/MapView"
+]).then(([Map, MapView]) => {
+  // Code to create the map and view will go here
+});
+```
+
+----
+<!-- .slide: data-background="./../common/slides/section.jpg" -->
+
+## _Lazy_ Loading the ArcGIS API
+
+<img class="transparent" src="img/wayson/nearby-featured-image.png">
+
+----
+
+### esri-loader
+
+<pre class="language-js">
+<code class="language-js">
+ // loads API 1st time
+const esriConfig = await loadModules(["esri/config"])
+esriConfig.useIdentity = false;
+// don't worry, this won't load the API again!
+const [Map, MapView] = await loadModules(
+  ["esri/Map", "esri/views/MapView"]
+);</code></pre>
+
+[Lazy loads the ArcGIS API](https://github.com/Esri/esri-loader#lazy-loading-the-arcgis-api-for-javascript) by default
+
+----
+
+### @arcgis/webpack-plugin
+
+```ts
+async function loadMap (element) => {
+  const mapUtils = await import("../utils/map");
+  mapUtils.loadMap(element);
+};
+
+  // then later inside the mounted/init...
+  loadMap(element);
+```
+
+Use [dynamic `import()`](https://webpack.js.org/guides/code-splitting/#dynamic-imports)
