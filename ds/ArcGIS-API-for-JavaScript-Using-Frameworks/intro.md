@@ -133,3 +133,42 @@ loadModules([
   // Code to create the map and view will go here
 });
 ```
+
+----
+<!-- .slide: data-background="./../common/slides/section.jpg" -->
+
+## _Lazy_ Loading the ArcGIS API
+
+<img class="transparent" src="img/wayson/nearby-featured-image.png">
+
+----
+
+### esri-loader
+
+<pre class="language-js">
+<code class="language-js">
+ // loads API 1st time
+const esriConfig = await loadModules(["esri/config"])
+esriConfig.useIdentity = false;
+// don't worry, this won't load the API again!
+const [Map, MapView] = await loadModules(
+  ["esri/Map", "esri/views/MapView"]
+);</code></pre>
+
+[Lazy loads the ArcGIS API](https://github.com/Esri/esri-loader#lazy-loading-the-arcgis-api-for-javascript) by default
+
+----
+
+### @arcgis/webpack-plugin
+
+```ts
+async function loadMap (element) => {
+  const mapUtils = await import("../utils/map");
+  mapUtils.loadMap(element);
+};
+
+  // then later inside the mounted/init...
+  loadMap(element);
+```
+
+Use [dynamic `import()`](https://webpack.js.org/guides/code-splitting/#dynamic-imports)
