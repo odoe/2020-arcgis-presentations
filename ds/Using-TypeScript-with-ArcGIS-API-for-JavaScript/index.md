@@ -27,7 +27,7 @@
 
 ### **Where do I begin?**
 <a href="https://www.typescriptlang.org/" target="_blank">
-<img src="../common/images/TS.png" alt="TypeScript landing page" height="516">
+<img src="../common/images/ts.png" alt="TypeScript landing page" height="516">
 </a>
 
 ----
