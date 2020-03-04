@@ -350,6 +350,7 @@ watchUtils.whenTrue(view, "stationary", () => {
 ```
 
 ----
+<!-- .slide: data-background="./../common/slides/section.jpg" -->
 
 ## Promises
 
@@ -363,6 +364,16 @@ watchUtils.whenTrue(view, "stationary", () => {
 ```js
 layer.queryFeatures(query).then(handleResult).catch(handleError);
 ```
+
+----
+
+### Notes
+
+> No more Dojo Promise, fully native Promise.
+
+> No more promise.cancel()
+
+> Use [AbortSignal](https://developer.mozilla.org/en-US/docs/Web/API/AbortSignal) if you need to cancel a Promise
 
 ----
 
@@ -442,6 +453,39 @@ catch(error) {
 ```
 
 ----
+
+## Abort Signal
+
+```js
+async function requestsMadness(urls, abortSignal) {
+  const promises = urls.map(url => request(url, { signal: abortSignal });
+  // Resolves all Promises, even if rejected
+  const results = await promiseUtils.eachAlways(promises);
+  if (abortSignal && abortSignal.aborted) {
+    // user should get a reject
+    throw promiseUtils.createAbortError();
+  }
+  return results;
+}
+const controller = new AbortController();
+const signal = controller.signal;
+
+requestsMadness(urls, signal);
+// somewhere in code
+controller.abort();
+```
+
+----
+
+### Where can I use AbortSignal?
+
+* [esri/request](https://developers.arcgis.com/javascript/latest/api-reference/esri-request.html#methods-summary)
+* [queryFeatures()](https://developers.arcgis.com/javascript/latest/api-reference/esri-layers-FeatureLayer.html#queryFeatures)
+* Other query tasks
+
+----
+<!-- .slide: data-background="./../common/slides/section.jpg" -->
+
 
 ## Patterns
 
