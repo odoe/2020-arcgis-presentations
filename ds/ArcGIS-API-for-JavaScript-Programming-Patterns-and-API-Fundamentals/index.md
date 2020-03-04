@@ -4,7 +4,7 @@
 <h1 style="text-align: left; font-size: 80px;">ArcGIS API for JavaScript Programming Patterns</h1>
 <h2 style="text-align: left; font-size: 60px;">and API Fundamentals</h2>
 <p style="text-align: left; font-size: 30px;">Kelly Hutchins| Rene Rubalcava</p>
-    <p style="text-align: left; font-size: 30px;">slides: <a href="https://git.io/Je0yr" target="_blank">https://git.io/Je0yr</a></p>
+    <p style="text-align: left; font-size: 30px;">slides: <a href="https://git.io/JvVml" target="_blank">https://git.io/JvVml</a></p>
 
 <!--
 In this session, you'll learn the basics of the ArcGIS API 4.x for JavaScript, including the fundamentals of watching for property changes, autocasting, working with collections, and lazy-loading data in your applications. You'll learn more details about maps, webmaps, layers, 2D and 3D views, UI, and widgets. This is a key session for developers new to the 4.x version of the API.
