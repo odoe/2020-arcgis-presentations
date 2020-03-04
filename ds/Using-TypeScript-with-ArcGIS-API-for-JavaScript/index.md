@@ -192,7 +192,7 @@ npm install --save @types/arcgis-js-api
   - Enable source maps in browser dev tools
   - Set breakpoints in .ts instead of .js
 
-  ![JS Code](../common/images/transpiled.png)
+  <img alt="Vue" src="../common/images/transpiled.png" class="transparent" height="450" />
 
 ----
 

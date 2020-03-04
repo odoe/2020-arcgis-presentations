@@ -1,6 +1,6 @@
 {
   "compilerOptions": {
-    "lib": ["dom", "es2015.promise", "es5"],
+    "lib": ["dom", "es2015", "es5"],
     "module": "amd", // output files as AMD modules
     "sourceMap": true,
     "target": "es5",
