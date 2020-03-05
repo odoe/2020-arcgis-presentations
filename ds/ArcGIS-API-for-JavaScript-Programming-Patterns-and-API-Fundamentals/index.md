@@ -156,7 +156,7 @@ portal.helperServices.geocode.map(geocoderService => {
 
 ## Widgets - Styling
  Available Themes
-<iframe height="600" style="width: 100%;" scrolling="no" title="Theme Testing" src="https://codepen.io/odoe/embed/preview/oNNGRbz?height=600&theme-id=31222&default-tab=js,result" frameborder="no" allowtransparency="true" allowfullscreen="true">
+<iframe height="600" style="width: 100%;" scrolling="no" title="Theme Testing" src="https://codepen.io/odoe/embed/preview/oNNGRbz?height=600&theme-id=39013&default-tab=js,result" frameborder="no" allowtransparency="true" allowfullscreen="true">
   See the Pen <a href='https://codepen.io/odoe/pen/oNNGRbz'>Theme Testing</a> by Rene Rubalcava
   (<a href='https://codepen.io/odoe'>@odoe</a>) on <a href='https://codepen.io'>CodePen</a>.
 </iframe>
@@ -166,7 +166,7 @@ portal.helperServices.geocode.map(geocoderService => {
 
 ## Widgets - Styling
   Light and dark themes 
-<iframe height="600" style="width: 100%;" scrolling="no" title="Theme Preferences" src="https://codepen.io/kellyhutchins/embed/QWbGGBv?height=265&theme-id=default&default-tab=html,result" frameborder="no" allowtransparency="true" allowfullscreen="true">
+<iframe height="600" style="width: 100%;" scrolling="no" title="Theme Preferences" src="https://codepen.io/kellyhutchins/embed/QWbGGBv?height=600&theme-id=default&default-tab=html,result" frameborder="no" allowtransparency="true" allowfullscreen="true">
   See the Pen <a href='https://codepen.io/kellyhutchins/pen/QWbGGBv'>Theme Preferences</a> by Kelly Hutchins
   (<a href='https://codepen.io/kellyhutchins'>@kellyhutchins</a>) on <a href='https://codepen.io'>CodePen</a>.
 </iframe>
@@ -256,7 +256,7 @@ const map = new Map({
 
 ## Basemap and Ground
 
-<iframe height='500' scrolling='no' title='VT Basemaps' src='//codepen.io/odoe/embed/preview/rpQOEM/?height=300&theme-id=31222&default-tab=js,result&embed-version=2' frameborder='no' allowtransparency='true' allowfullscreen='true' style='width: 100%;'>See the Pen <a href='https://codepen.io/odoe/pen/rpQOEM/'>VT Basemaps</a> by Rene Rubalcava (<a href='https://codepen.io/odoe'>@odoe</a>) on <a href='https://codepen.io'>CodePen</a>.
+<iframe height='500' scrolling='no' title='VT Basemaps' src='//codepen.io/odoe/embed/preview/rpQOEM/?height=300&theme-id=39013&default-tab=js,result&embed-version=2' frameborder='no' allowtransparency='true' allowfullscreen='true' style='width: 100%;'>See the Pen <a href='https://codepen.io/odoe/pen/rpQOEM/'>VT Basemaps</a> by Rene Rubalcava (<a href='https://codepen.io/odoe'>@odoe</a>) on <a href='https://codepen.io'>CodePen</a>.
 </iframe>
 
 ----
@@ -265,7 +265,7 @@ const map = new Map({
 
 - [`esri/core/Collection`](https://developers.arcgis.com/javascript/latest/api-reference/esri-core-Collection.html)
 
-<iframe height="400" style="width: 100%;" scrolling="no" title="Collection" src="//codepen.io/odoe/embed/preview/MQWLwO/?height=300&theme-id=31222&default-tab=js,result" frameborder="no" allowtransparency="true" allowfullscreen="true">
+<iframe height="400" style="width: 100%;" scrolling="no" title="Collection" src="//codepen.io/odoe/embed/preview/MQWLwO/?height=300&theme-id=39013&default-tab=js,result" frameborder="no" allowtransparency="true" allowfullscreen="true">
   See the Pen <a href='https://codepen.io/odoe/pen/MQWLwO/'>Collection</a> by Rene Rubalcava
   (<a href='https://codepen.io/odoe'>@odoe</a>) on <a href='https://codepen.io'>CodePen</a>.
 </iframe>
@@ -330,8 +330,8 @@ watchUtils.whenTrue(view, "stationary", () => {
 ### Accessor - autocasting and single constructor
 
 ```js
-  // 4.x
   {
+    // autocast as new SimpleMarkerSymbol()
     type: "simple-marker",
     style: 'square',
     color: 'red',
@@ -341,18 +341,16 @@ watchUtils.whenTrue(view, "stationary", () => {
       width: 4
     }
   });
-
-  // 3.x
-  new SimpleMarkerSymbol(SimpleMarkerSymbol.STYLE_SQUARE, 10,
-    new SimpleLineSymbol(SimpleLineSymbol.STYLE_SOLID,
-    new Color([255,0,0]), 4),
-    new Color([255,255,255,0.25]));
 ```
 
 ----
 <!-- .slide: data-background="./../common/slides/section.jpg" -->
 
 ## Promises
+
+<img src="../common/images/promises.png" alt="Questions?" height="450" style="border: 0px; background:none; box-shadow: none;">
+
+[mdn](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Promise)
 
 ----
 
@@ -378,8 +376,6 @@ layer.queryFeatures(query).then(handleResult).catch(handleError);
 ----
 
 ## Promises with async/await
-
-- work with native promises
 
 ```js
 const doQuery = async (query) => {
@@ -553,6 +549,8 @@ view.on("click", ({ x, y }) => {
 
 ----
 
+## Loadables
+
 ```js
   //In a single page application, get a feature from a FeatureLayer from a WebMap without displaying it, ASAP!
   const webmap = new WebMap({
@@ -577,6 +575,12 @@ view.on("click", ({ x, y }) => {
       console.error(error);
     });
 ```
+
+----
+
+## Zoom or Scale
+
+<img src="../common/images/basemap_zoom.gif" alt="Basemaps with Zoom" height="516">
 
 ----
 
@@ -613,23 +617,11 @@ const view = new MapView({
 
 ----
 
-## WebMap is still a Map
+## Zoom or Scale
 
-```js
-const map = new WebMap({
-  basemap: { ... },
-  layers: [ ... ]
-});
-```
-
-- Still acts like a regular `Map`
-- Has some advantages
-
-----
-
-## WebMap is still a Map
-
-<iframe height='500' scrolling='no' title='Local bookmarks' src='//codepen.io/odoe/embed/preview/QxrEVX/?height=500&theme-id=31222&default-tab=js,result&embed-version=2' frameborder='no' allowtransparency='true' allowfullscreen='true' style='width: 100%;'>See the Pen <a href='https://codepen.io/odoe/pen/QxrEVX/'>Local bookmarks</a> by Rene Rubalcava (<a href='https://codepen.io/odoe'>@odoe</a>) on <a href='https://codepen.io'>CodePen</a>.
+<iframe height="500" style="width: 100%;" scrolling="no" title="Zoom and Scale" src="https://codepen.io/odoe/embed/preview/NWqazra?height=500&theme-id=39013&default-tab=js,result&editable=true" frameborder="no" allowtransparency="true" allowfullscreen="true">
+  See the Pen <a href='https://codepen.io/odoe/pen/NWqazra'>Zoom and Scale</a> by Rene Rubalcava
+  (<a href='https://codepen.io/odoe'>@odoe</a>) on <a href='https://codepen.io'>CodePen</a>.
 </iframe>
 
 ----
@@ -637,14 +629,16 @@ const map = new WebMap({
 ## Sublayer to FeatureLayer
 
 - You can extract a FeatureLayer from MapImageLayer Sublayer
-- `sublayer.createFeatureLayer()`
+- `sublayer.createFeatureLayer()` returns a _Promise_
 - Can use capabilities not normally available with Sublayer
 
 ----
 
 ## Sublayer to FeatureLayer
 
-<iframe height='500' scrolling='no' title='createFeatureLayer' src='//codepen.io/odoe/embed/preview/PaxeyO/?height=500&theme-id=31222&default-tab=js,result&embed-version=2' frameborder='no' allowtransparency='true' allowfullscreen='true' style='width: 100%;'>See the Pen <a href='https://codepen.io/odoe/pen/PaxeyO/'>createFeatureLayer</a> by Rene Rubalcava (<a href='https://codepen.io/odoe'>@odoe</a>) on <a href='https://codepen.io'>CodePen</a>.
+<iframe height="500" style="width: 100%;" scrolling="no" title="createFeatureLayer" src="https://codepen.io/odoe/embed/preview/PaxeyO?height=500&theme-id=39013&default-tab=js,result" frameborder="no" allowtransparency="true" allowfullscreen="true">
+  See the Pen <a href='https://codepen.io/odoe/pen/PaxeyO'>createFeatureLayer</a> by Rene Rubalcava
+  (<a href='https://codepen.io/odoe'>@odoe</a>) on <a href='https://codepen.io'>CodePen</a>.
 </iframe>
 
 ----
@@ -660,7 +654,7 @@ const map = new WebMap({
 
 ## createQuery
 
-<iframe height='500' scrolling='no' title='createQuery' src='//codepen.io/odoe/embed/preview/rKQqQW/?height=500&theme-id=31222&default-tab=js,result&embed-version=2' frameborder='no' allowtransparency='true' allowfullscreen='true' style='width: 100%;'>See the Pen <a href='https://codepen.io/odoe/pen/rKQqQW/'>createQuery</a> by Rene Rubalcava (<a href='https://codepen.io/odoe'>@odoe</a>) on <a href='https://codepen.io'>CodePen</a>.
+<iframe height='500' scrolling='no' title='createQuery' src='//codepen.io/odoe/embed/preview/rKQqQW/?height=500&theme-id=39013&default-tab=js,result&embed-version=2' frameborder='no' allowtransparency='true' allowfullscreen='true' style='width: 100%;'>See the Pen <a href='https://codepen.io/odoe/pen/rKQqQW/'>createQuery</a> by Rene Rubalcava (<a href='https://codepen.io/odoe'>@odoe</a>) on <a href='https://codepen.io'>CodePen</a>.
 </iframe>
 
 ----
@@ -675,7 +669,7 @@ const map = new WebMap({
 
 ## MapImageLayer
 
-<iframe height='500' scrolling='no' title='MapImageLayer - Load Sublayers' src='//codepen.io/odoe/embed/preview/WyYBwL/?height=500&theme-id=31222&default-tab=js,result&embed-version=2' frameborder='no' allowtransparency='true' allowfullscreen='true' style='width: 100%;'>See the Pen <a href='https://codepen.io/odoe/pen/WyYBwL/'>MapImageLayer - Load Sublayers</a> by Rene Rubalcava (<a href='https://codepen.io/odoe'>@odoe</a>) on <a href='https://codepen.io'>CodePen</a>.
+<iframe height='500' scrolling='no' title='MapImageLayer - Load Sublayers' src='//codepen.io/odoe/embed/preview/WyYBwL/?height=500&theme-id=39013&default-tab=js,result&embed-version=2' frameborder='no' allowtransparency='true' allowfullscreen='true' style='width: 100%;'>See the Pen <a href='https://codepen.io/odoe/pen/WyYBwL/'>MapImageLayer - Load Sublayers</a> by Rene Rubalcava (<a href='https://codepen.io/odoe'>@odoe</a>) on <a href='https://codepen.io'>CodePen</a>.
 </iframe>
 
 ----
@@ -692,8 +686,16 @@ const map = new WebMap({
 
 ## LayerViews
 
-<iframe height='500' scrolling='no' title='LayerView - Ready' src='//codepen.io/odoe/embed/preview/YvRJgj/?height=500&theme-id=31222&default-tab=js,result&embed-version=2' frameborder='no' allowtransparency='true' allowfullscreen='true' style='width: 100%;'>See the Pen <a href='https://codepen.io/odoe/pen/YvRJgj/'>LayerView - Ready</a> by Rene Rubalcava (<a href='https://codepen.io/odoe'>@odoe</a>) on <a href='https://codepen.io'>CodePen</a>.
+<iframe height="500" style="width: 100%;" scrolling="no" title="LayerView - When Things are Done" src="https://codepen.io/odoe/embed/preview/gOpadzL?height=500&theme-id=39013&default-tab=js,result" frameborder="no" allowtransparency="true" allowfullscreen="true">
+  See the Pen <a href='https://codepen.io/odoe/pen/gOpadzL'>LayerView - When Things are Done</a> by Rene Rubalcava
+  (<a href='https://codepen.io/odoe'>@odoe</a>) on <a href='https://codepen.io'>CodePen</a>.
 </iframe>
+
+----
+
+### Questions?
+
+<img src="../common/images/questions.gif" alt="Questions?" height="516" style="border: 0px; background:none; box-shadow: none;">
 
 ----
 
