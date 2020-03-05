@@ -297,6 +297,9 @@ const WebMapView = lazy(() => import("../components/WebMapView"));
 </Suspense>
 ```
 
+----
+<!-- .slide: data-background="../common/slides/demo.jpg" -->
+
 ## Demo: Location picker w/ lazy load
 
 <img class="transparent" height="400" src="img/wayson/location-picker-screenshot.png">
