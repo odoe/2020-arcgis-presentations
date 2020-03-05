@@ -194,7 +194,7 @@ setReady(true);
 ----
 
 <!-- .slide: data-background="../common/slides/section.jpg" -->
-## Modern React APIs and the ArcGIS API
+## Modern React and the ArcGIS API
 
 ----
 
