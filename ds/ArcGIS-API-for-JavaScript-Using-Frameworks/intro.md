@@ -12,18 +12,17 @@ Do you have a framework of choice for building apps? Learn how to use various fr
 
 ----
 
-## ArcGIS API Framework Guides
+## [ArcGIS API Framework Guides](https://developers.arcgis.com/javascript/latest/guide/using-frameworks/)
 
 <a href="https://developers.arcgis.com/javascript/latest/guide/using-frameworks/"><img src="img/wayson/jsapi-frameworks-screenshot.png" class="transparent" height="400" /></a>
-
 
 ----
 
 ## ArcGIS
 
-- <!-- .element: class="fragment" --> `Map`
+1. <!-- .element: class="fragment" --> `Map`
   - `basemap`, `portalItem`, ...
-- <!-- .element: class="fragment" --> `View`
+1. <!-- .element: class="fragment" --> `View`
   - `map`
   - `container`
   - ...
@@ -32,10 +31,10 @@ Do you have a framework of choice for building apps? Learn how to use various fr
 
 ## Framework
 
-- <!-- .element: class="fragment" --> global state
+1. <!-- .element: class="fragment" --> global state
   - router
   - store
-- <!-- .element: class="fragment" --> `render(<App>, '#root')`
+1. <!-- .element: class="fragment" --> `render(<App>, '#root')`
   - <!-- .element: style="list-style: none" -->  `<Layout>`
     - <!-- .element: style="list-style: none" --> `<Parent>`
       - <!-- .element: style="list-style: none" --> `<Child>`

@@ -66,7 +66,7 @@ export default class EsriMap extends Component {
 ----
 
 <!-- .slide: data-transition="fade" -->
-### Custom Modifiers
+### [Custom Modifiers](https://github.com/ember-modifier/ember-modifier)
 
 ```html
 <div style="height: 400px;" {{webmap @id}}></div>
