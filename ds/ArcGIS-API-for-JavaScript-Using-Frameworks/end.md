@@ -11,6 +11,8 @@
   <img src="img/svelte/svelte-logo.svg" class="transparent" height="120" />
 </div>
 
+<p>... and [all the others](https://github.com/Esri/esri-loader#examples)</p>
+
 ----
 
 <!-- .slide: data-transition="fade" -->
