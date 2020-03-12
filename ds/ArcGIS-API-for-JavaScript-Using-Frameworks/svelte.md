@@ -75,4 +75,3 @@ https://github.com/jwasilgeo/esri-svelte-basemaps-example
     https://svelte.dev
   </div>
 </div>
-----
