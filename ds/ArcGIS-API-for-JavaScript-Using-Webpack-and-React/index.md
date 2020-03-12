@@ -193,6 +193,12 @@ setReady(true);
 
 ----
 
+<!-- .slide: data-background="./../common/slides/section.jpg" -->
+
+# Rene
+
+----
+
 <!-- .slide: data-background="../common/slides/section.jpg" -->
 ## Modern React and the ArcGIS API
 

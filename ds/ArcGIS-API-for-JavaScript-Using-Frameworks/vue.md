@@ -1,5 +1,11 @@
 <!-- .slide: data-background="./../common/slides/section.jpg" -->
 
+# Rene
+
+----
+
+<!-- .slide: data-background="./../common/slides/section.jpg" -->
+
 ## Vue
 
 <img alt="Vue" src="../common/images/vue-logo.png" class="transparent" height="250" />

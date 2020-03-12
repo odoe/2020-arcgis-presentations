@@ -7,6 +7,11 @@
     <p style="text-align: left; font-size: 30px;">slides: <a href="https://git.io/JvVmE" target="_blank">https://git.io/JvVmE</a></p>
 
 ----
+<!-- .slide: data-background="./../common/slides/section.jpg" -->
+
+# Noah
+
+----
 
 ### **Agenda**
 </br>
@@ -127,6 +132,10 @@ npm install --save @types/arcgis-js-api
 ```
 
 ----
+
+<!-- .slide: data-background="./../common/slides/section.jpg" -->
+
+# Rene
 
 <img src="../common/images/wheres_rene.png" alt="Where is Rene?">
 

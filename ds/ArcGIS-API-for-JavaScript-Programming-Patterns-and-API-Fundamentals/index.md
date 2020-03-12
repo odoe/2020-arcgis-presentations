@@ -13,9 +13,7 @@ In this session, you'll learn the basics of the ArcGIS API 4.x for JavaScript, i
 ----
 <!-- .slide: data-background="./../common/slides/section.jpg" -->
 
-# Intro
-
-- Kelly
+# Kelly
 
 ----
 <!-- .slide: data-background="./../common/slides/background.jpg" -->
@@ -280,9 +278,7 @@ const map = new Map({
 ----
 <!-- .slide: data-background="./../common/slides/section.jpg" -->
 
-# Accessors
-
-- Rene
+# Rene
 
 ----
 

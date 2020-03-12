@@ -1,4 +1,9 @@
 <!-- .slide: data-background="./../common/slides/section.jpg" -->
+
+# Gavin
+
+----
+<!-- .slide: data-background="./../common/slides/section.jpg" -->
 <div style="display:flex">
   <div style="flex: 1;"><img src="img/svelte/svelte-logo.svg" class="transparent" height="400" /></div>
   <div style="flex: 2; align-self: center; text-align: left">
@@ -6,6 +11,7 @@
     https://svelte.dev
   </div>
 </div>
+
 ----
 
 ## What is Svelte?
