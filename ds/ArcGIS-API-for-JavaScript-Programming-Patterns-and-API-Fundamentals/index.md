@@ -11,6 +11,13 @@ In this session, you'll learn the basics of the ArcGIS API 4.x for JavaScript, i
 -->
 
 ----
+<!-- .slide: data-background="./../common/slides/section.jpg" -->
+
+# Intro
+
+- Kelly
+
+----
 <!-- .slide: data-background="./../common/slides/background.jpg" -->
 
 ## What do I get with the 4x JSAPI?
@@ -269,6 +276,13 @@ const map = new Map({
   See the Pen <a href='https://codepen.io/odoe/pen/MQWLwO/'>Collection</a> by Rene Rubalcava
   (<a href='https://codepen.io/odoe'>@odoe</a>) on <a href='https://codepen.io'>CodePen</a>.
 </iframe>
+
+----
+<!-- .slide: data-background="./../common/slides/section.jpg" -->
+
+# Accessors
+
+- Rene
 
 ----
 
