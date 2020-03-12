@@ -358,7 +358,7 @@ watchUtils.whenTrue(view, "stationary", () => {
 
 ## Promises
 
-<img src="../common/images/promises.png" alt="Questions?" height="450" style="border: 0px; background:none; box-shadow: none;">
+<img src="../common/images/promises.png" alt="Promises" height="450" style="border: 0px; background:none; box-shadow: none;">
 
 [mdn](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Promise)
 
@@ -700,12 +700,6 @@ const view = new MapView({
   See the Pen <a href='https://codepen.io/odoe/pen/gOpadzL'>LayerView - When Things are Done</a> by Rene Rubalcava
   (<a href='https://codepen.io/odoe'>@odoe</a>) on <a href='https://codepen.io'>CodePen</a>.
 </iframe>
-
-----
-
-### Questions?
-
-<img src="../common/images/questions.gif" alt="Questions?" height="516" style="border: 0px; background:none; box-shadow: none;">
 
 ----
 
