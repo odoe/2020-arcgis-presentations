@@ -6,9 +6,6 @@
 <p style="text-align: left; font-size: 30px;">Kelly Hutchins| Rene Rubalcava</p>
     <p style="text-align: left; font-size: 30px;">slides: <a href="https://git.io/JvVml" target="_blank">https://git.io/JvVml</a></p>
 
-<!--
-In this session, you'll learn the basics of the ArcGIS API 4.x for JavaScript, including the fundamentals of watching for property changes, autocasting, working with collections, and lazy-loading data in your applications. You'll learn more details about maps, webmaps, layers, 2D and 3D views, UI, and widgets. This is a key session for developers new to the 4.x version of the API.
--->
 
 ----
 <!-- .slide: data-background="./../common/slides/section.jpg" -->
@@ -27,17 +24,7 @@ In this session, you'll learn the basics of the ArcGIS API 4.x for JavaScript, i
 
 ----
 
-<!-- .slide: data-background="./../common/slides/background.jpg" -->
-## What are my options?
-
-- Needs?
-- Resources?
-- Time?
-- Customizations?
-
-----
-
-## Why start from scratch?
+## Getting Started 
 
 - App starters
 - Widgets
@@ -48,7 +35,7 @@ In this session, you'll learn the basics of the ArcGIS API 4.x for JavaScript, i
 <!-- .slide: data-background="./../common/slides/background.jpg" -->
 ## Widgets!
 - We'll look at a few <a href="https://developers.arcgis.com/javascript/latest/sample-code/index.html?search=Widget">widgets</a>
-- ~30 Widgets out of the box <!-- .element: class="fragment" data-fragment-index="1" -->
+- ~40 Widgets out of the box <!-- .element: class="fragment" data-fragment-index="1" -->
 - Widgets help make great apps <!-- .element: class="fragment" data-fragment-index="2" -->
 - Less code for you to write <!-- .element: class="fragment" data-fragment-index="3" -->
 - Designed with responsive apps in mind <!-- .element: class="fragment" data-fragment-index="4" -->
@@ -61,46 +48,52 @@ In this session, you'll learn the basics of the ArcGIS API 4.x for JavaScript, i
  - Icons
  - Group
  - Mode
+  <img src="./img/Expand.gif" style="position:absolute;right:125px;top:65%;"/>
 <aside class="notes">Look at a few key widgets start with expand and point out common questions/gotchas </aside>
 
 ----
 
-## Widgets - Use Portal Content
+## Widgets - Portal Content
 
- - [Search](https://codepen.io/kellyhutchins/pen/EMNPmZ)
- - Basemap Gallery
+ - portalUrl (esri/config)
+ - Theming, units, resources 
+
+<iframe height="500" width="500" style="width: 100%;" scrolling="no" title="Portal demo" src="https://codepen.io/kellyhutchins/pen/rRoooz?theme-id=31222&default-tab=js,result" frameborder="no" allowtransparency="true" allowfullscreen="true">
+  See the Pen <a href='https://codepen.io/kellyhutchins/pen/rRoooz'>Theme Testing</a> by Kelly Hutchins
+  (<a href='https://codepen.io/kellyhutchins'>@kellyhutchins</a>) on <a href='https://codepen.io'>CodePen</a>.
+</iframe>
 <aside class="notes">Show how we can provide portal and widgets like search and bmg use that content.  </aside>
 
 ----
 
-## Widgets - Popup
- - [Menu actions](https://developers.arcgis.com/javascript/latest/sample-code/sandbox/index.html?sample=popup-actions)
- - [Dock](https://developers.arcgis.com/javascript/latest/sample-code/sandbox/index.html?sample=popup-docking-position)
-<aside class="notes">   </aside>
 
-----
-
-## Widgets - Popup Template
+## Widgets - Popup 
+ - Responsive
+ - Dockable
  - Define fields, charts, custom html content
- - [Using a function](https://developers.arcgis.com/javascript/latest/sample-code/sandbox/index.html?sample=popuptemplate-promise)
- - Promises
- - Arcade
 
-<aside class="notes"> Talk about different ways to define/set popup content</aside>
+<a href="https://developers.arcgis.com/javascript/latest/sample-code/popuptemplate-arcade-groupby/index.html"><img src="./common/images/../../../common/images/popup.png"></a>
+
 
 ----
 
-## Widgets - Author popup in online
- - [Web Map or Web Scene](http://jsapi.maps.arcgis.com/home/webmap/viewer.html?webmap=e9e5311ac8ec4110abe77b026ce87cf7)
+
+### Widgets - Author popup content in Online 
+
+<div style="max-width:50%;">
+ - Web Map or Web Scene
  - Layer.fromPortalItem
- - [App Demo](http://www.arcgis.com/apps/Media/index.html?appid=ba47f08a73e142908475b841e0e38b02)
-<aside class="notes">Popups can be lots of work to define field info etc. If you use web map, scene, layer you get popup (and rendering) info for free</aside>
+</div>
+<a href="https://codepen.io/kellyhutchins/pen/VwLQxqx" style="position:absolute;right:120px;top:120px;"><img src="./img/popup.png" ></a>
 
 ----
 
 ## Widgets - Feature
  - Display popup template content
  - [Hover](https://developers.arcgis.com/javascript/latest/sample-code/sandbox/index.html?sample=widgets-feature)
+ - [Sidepanel](https://developers.arcgis.com/javascript/latest/sample-code/widgets-feature-sidepanel/index.html)
+
+<img src="../common/images/sidepanel.png" style="height:300px;" />
 <aside class="notes">Display popup content someplace else</aside>
 
 ----
@@ -114,54 +107,28 @@ In this session, you'll learn the basics of the ArcGIS API 4.x for JavaScript, i
 
 ----
 
-## View Models
+## Custom View 
 
- - [Custom View](https://developers.arcgis.com/javascript/latest/sample-code/sandbox/index.html?sample=widgets-frameworks-react)
- - [Use the view model](https://developers.arcgis.com/example-apps/nearby-javascript/?utm_source=github&utm_campaign=example_apps_nearby_javascript)
-  - [Additional Examples](https://odoe.net/blog/view-models-in-the-arcgis-api-for-javascript/)
-
-----
-
-## Geocoding
-
-```js
-const locator = new Locator({ url: url });
-locator.addressToLocations({
-  address: {
-    "singleLine": "380 New York St, Redlands, CA 92373"
-  }
-});
-locator.locationToAddress({ location: point });
-```
+  [Expand.tsx](https://developers.arcgis.com/javascript/latest/api-reference/esri-widgets-Expand.html)
+  
+<a href="https://github.com/Esri/attachment-viewer/blob/master/src/app/Components/MobileExpand.tsx#L555"><img src="../common/images/customView.png"/></a>
 
 ----
 
-## Geocoding
+## Use the View Model 
 
-```js
-const searchVM = new SearchVM();
-searchVM.search("380 New York St, Redlands, CA 92373");
-searchVM.search(location);
-```
-
-----
-
-## Geocoding
-
-```js
-const portal = new Portal(...);
-await portal.load();
-portal.helperServices.geocode.map(geocoderService => {
-  // objects with details on
-  // geocode services for your portal
-});
-```
+- Business logic and communication
+  
+<iframe height="500" width="500" style="width: 100%;" scrolling="no" title="Portal demo" src="https://codepen.io/odoe/embed/omqGMe?height=300&slug-hash=omqGMe&default-tabs=js,result&host=https://codepen.io#js-box" frameborder="no" allowtransparency="true" allowfullscreen="true">
+  (<a href='https://codepen.io/odoe/embed/omqGMe'>Search on click</a>) on <a href='https://codepen.io'>CodePen</a>.
+</iframe>
 
 ----
+
 
 ## Widgets - Styling
  Available Themes
-<iframe height="600" style="width: 100%;" scrolling="no" title="Theme Testing" src="https://codepen.io/odoe/embed/preview/oNNGRbz?height=600&theme-id=39013&default-tab=js,result" frameborder="no" allowtransparency="true" allowfullscreen="true">
+<iframe height="500" width="500" style="width: 100%;" scrolling="no" title="Theme Testing" src="https://codepen.io/odoe/embed/preview/oNNGRbz?height=600&theme-id=39013&default-tab=js,result" frameborder="no" allowtransparency="true" allowfullscreen="true">
   See the Pen <a href='https://codepen.io/odoe/pen/oNNGRbz'>Theme Testing</a> by Rene Rubalcava
   (<a href='https://codepen.io/odoe'>@odoe</a>) on <a href='https://codepen.io'>CodePen</a>.
 </iframe>
@@ -171,7 +138,7 @@ portal.helperServices.geocode.map(geocoderService => {
 
 ## Widgets - Styling
   Light and dark themes 
-<iframe height="600" style="width: 100%;" scrolling="no" title="Theme Preferences" src="https://codepen.io/kellyhutchins/embed/QWbGGBv?height=600&theme-id=default&default-tab=html,result" frameborder="no" allowtransparency="true" allowfullscreen="true">
+<iframe height="500" width="500" style="width: 100%;" scrolling="no" title="Theme Preferences" src="https://codepen.io/kellyhutchins/embed/QWbGGBv?height=600&theme-id=default&default-tab=html,result" frameborder="no" allowtransparency="true" allowfullscreen="true">
   See the Pen <a href='https://codepen.io/kellyhutchins/pen/QWbGGBv'>Theme Preferences</a> by Kelly Hutchins
   (<a href='https://codepen.io/kellyhutchins'>@kellyhutchins</a>) on <a href='https://codepen.io'>CodePen</a>.
 </iframe>
@@ -180,7 +147,7 @@ portal.helperServices.geocode.map(geocoderService => {
 ----
 
 ## Widgets - Styling
- - CSS Extension language
+ - Custom 
  - SASS
  - [Theme Utility](https://github.com/jcfranco/jsapi-styles)
 
@@ -190,6 +157,13 @@ portal.helperServices.geocode.map(geocoderService => {
 ----
 
 ## Map and View
+  - Maps manage references to layers and basemap 
+  - Views 
+    - Display layers
+    - Handle interaction 
+  - Map View 2D
+  - Scene View 3D
+  
 
 ----
 
@@ -197,7 +171,8 @@ portal.helperServices.geocode.map(geocoderService => {
 
 ```js
 const map = new Map({
-  basemap: "topo"
+  basemap: "topo",
+  layers: mapLayers // optional 
 });
 
 const mView = new MapView({
@@ -211,6 +186,21 @@ const sView = new SceneView({
 ```
 
 ----
+
+
+
+## Multiple Views 
+
+- Switch 2d to 3d
+  - One map multiple views
+  - Web map and Web scene 
+  - <a href="https://developers.arcgis.com/javascript/latest/sample-code/views-switch-2d-3d/index.html">Limitations</a> 
+
+- <a href="https://developers.arcgis.com/javascript/latest/sample-code/webmap-swap/index.html">Swap maps </a>
+  
+----
+
+
 
 ## Basemaps and Ground
 
@@ -227,7 +217,7 @@ const map = new Map({
   basemap: "streets"
 
   /*
-   world-elevation
+   world-elevation, world-topobathymetry 
    */
   ground: "world-elevation"
 });
@@ -235,45 +225,18 @@ const map = new Map({
 
 ----
 
-## Basemaps and Ground
-
-```js
-const map = new Map({
-  basemap: {
-    // Layers drawn at the bottom
-    baseLayers: [
-      new TileLayer({ url: baselayer })
-    ],
-    // Layers drawn on top
-    referenceLayers: [
-      new TileLayer({ url: refUrl })
-    ],
-  },
-  ground: {
-    layers: [
-      new ElevationLayer({ url: elevationUrl })
-    ]
-  }
-});
-```
-
-----
-
-## Basemap and Ground
-
-<iframe height='500' scrolling='no' title='VT Basemaps' src='//codepen.io/odoe/embed/preview/rpQOEM/?height=300&theme-id=39013&default-tab=js,result&embed-version=2' frameborder='no' allowtransparency='true' allowfullscreen='true' style='width: 100%;'>See the Pen <a href='https://codepen.io/odoe/pen/rpQOEM/'>VT Basemaps</a> by Rene Rubalcava (<a href='https://codepen.io/odoe'>@odoe</a>) on <a href='https://codepen.io'>CodePen</a>.
-</iframe>
-
-----
-
 ## Collections
 
 - [`esri/core/Collection`](https://developers.arcgis.com/javascript/latest/api-reference/esri-core-Collection.html)
-
-<iframe height="400" style="width: 100%;" scrolling="no" title="Collection" src="//codepen.io/odoe/embed/preview/MQWLwO/?height=300&theme-id=39013&default-tab=js,result" frameborder="no" allowtransparency="true" allowfullscreen="true">
-  See the Pen <a href='https://codepen.io/odoe/pen/MQWLwO/'>Collection</a> by Rene Rubalcava
-  (<a href='https://codepen.io/odoe'>@odoe</a>) on <a href='https://codepen.io'>CodePen</a>.
-</iframe>
+- Store items of same type
+- Utility methods (filter, add, remove, forEach)
+- Change event 
+  
+```ts
+  view.map.layers.forEach((layer) => {
+    console.log("Layer", layer.title);
+  });
+```
 
 ----
 <!-- .slide: data-background="./../common/slides/section.jpg" -->
