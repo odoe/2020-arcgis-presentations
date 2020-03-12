@@ -190,13 +190,6 @@ setReady(true);
   <li class="fragment">✅ be careful not to destroy the view until unmounting</li>
 </li>
 
-
-----
-
-<!-- .slide: data-background="./../common/slides/section.jpg" -->
-
-# Rene
-
 ----
 
 <!-- .slide: data-background="../common/slides/section.jpg" -->
@@ -304,13 +297,6 @@ const WebMapView = lazy(() => import("../components/WebMapView"));
 ```
 
 ----
-<!-- .slide: data-background="../common/slides/demo.jpg" -->
-
-## Demo: Location picker w/ lazy load
-
-<img class="transparent" height="400" src="img/wayson/location-picker-screenshot.png">
-
-----
 
 <!-- .slide: data-background="../common/slides/demo.jpg" -->
 
@@ -323,10 +309,10 @@ const WebMapView = lazy(() => import("../components/WebMapView"));
 <!-- .slide: data-background="../common/slides/section.jpg" data-transition="fade" -->
 
 ## 😎 [@arcgis/webpack-plugin](https://github.com/Esri/arcgis-webpack-plugin) 👍
-<p class="fragment">... but</p>
+<p>... but</p>
+<p class="fragment">Must be using webpack 🙄</p>
 <p class="fragment">ArcGIS API 4.7+ only</p>
 <p class="fragment">Must be able to configure webpack</p>
-
 
 ----
 
@@ -363,17 +349,12 @@ const WebMapView = lazy(() => import("../components/WebMapView"));
 ----
 
 <!-- .slide: data-transition="fade" -->
-<p>👵 ArcGIS API < 4.7x? 👴</p>
-<p class="fragment">🔒 No access to webpack config? 🔒</p>
-<p class="fragment">🙈 Don't _want_ to config webpack? 😱</p>
-
-----
-
-<!-- .slide: data-transition="fade" -->
-###  No problem. Try [esri-loader](https://github.com/Esri/esri-loader)
-
-<div>
-    <img src="../common/images/esri-loader-band-aid-center-text.png" class="transparent" height="120" />
+<p>👵 ArcGIS API 3.x? 👴</p>
+<p>🚀 CLI blocks access to webpack config? 🔒</p>
+<p>🙈 Don't _want_ to config webpack? 😱</p>
+<div class="fragment">
+  <p>No problem. Try [esri-loader](https://github.com/Esri/esri-loader)</p>
+  <img src="img/wayson/esri-loader-band-aid-center-text.png" class="transparent" height="120" />
 </div>
 
 ----
@@ -443,7 +424,7 @@ const WebMapView = lazy(() => import("../components/WebMapView"));
 ----
 
 <!-- .slide: data-background="../common/slides/background.jpg" class="code-md" data-transition="fade" -->
-### Using [esri-loader](https://github.com/Esri/esri-loader#install) with Webpack
+### Installing [esri-loader](https://github.com/Esri/esri-loader#install)
 
 <img class="transparent" src="../common/images/800px-Npm-logo.svg.png" style="width: 300px; margin: 110px 0;">
 <h3><code>npm install --save esri-loader</code></h3>
@@ -451,7 +432,7 @@ const WebMapView = lazy(() => import("../components/WebMapView"));
 ----
 
 <!-- .slide: data-background="../common/slides/background.jpg" class="code-md" data-transition="fade" -->
-### Using [esri-loader](https://github.com/Esri/esri-loader#install) with Webpack
+### Installing [esri-loader](https://github.com/Esri/esri-loader#install)
 
 <img class="transparent" src="../common/images/yarn-cat-eating-bower-bird.png">
 <h3><code>yarn add esri-loader</code></h3>
@@ -491,7 +472,7 @@ require([
 ----
 
 <!-- .slide: data-background="../common/slides/background.jpg" class="code-md" data-transition="fade" -->
-### [Load a specific version of the ArcGIS API](https://github.com/Esri/esri-loader#from-a-specific-version)
+### [Lazy loads the ArcGIS API](https://github.com/Esri/esri-loader#lazy-loading-the-arcgis-api-for-javascript) by default
 
 ```js
  // loads API 1st time
@@ -509,6 +490,7 @@ const [Map, MapView] = await loadModules(
 ### Additional options & patterns
 
 See the esri-loader docs for examples of:
+- [Using a specific version of the ArcGIS API](https://github.com/Esri/esri-loader#from-a-specific-version)
 - [configuring Dojo](https://github.com/Esri/esri-loader#configuring-dojo)
 - [using ArcGIS types in TS](https://github.com/Esri/esri-loader#arcgis-types)
 - and [more](https://github.com/Esri/esri-loader#advanced-usage)
@@ -517,11 +499,23 @@ See the esri-loader docs for examples of:
 
 <!-- .slide: data-background="../common/slides/demo.jpg" data-transition="fade" -->
 
-## Demo
+### [esri-loader-hooks](https://github.com/tomwayson/esri-loader-hooks#usewebmap)
 
-[Theme Switcher (on CodeSandbox)](https://codesandbox.io/s/8ykw098vw0)
+```jsx
+import React from 'react';
+import { useWebMap } from 'esri-loader-hooks';
 
-<iframe src="https://codesandbox.io/embed/8ykw098vw0?fontsize=14&module=%2Fsrc%2Futils%2Fmap.js" style="width:100%; height:500px; border:0; border-radius: 4px; overflow:hidden;" sandbox="allow-modals allow-forms allow-popups allow-scripts allow-same-origin"></iframe>
+function WebMap() {
+  const [ref] = useWebMap('e691172598f04ea8881cd2a4adaa45ba');
+  return <div style={{ height: 400 }} ref={ref} />;
+}
+```
+
+----
+
+### Example: [esri-loader-hooks](https://esri-loader-hooks.netlify.com/)
+
+<a href="https://esri-loader-hooks.netlify.com/"><img src="img/wayson/esri-loader-hooks-screenshot.png" height="400"></a>
 
 ----
 
@@ -556,7 +550,7 @@ See the esri-loader docs for examples of:
   <img src="../common/images/react-js-img.png" class="transparent" height="120" />
 </div>
 
-Notes:
+Note:
 It's never been a better time to be a React dev
 It's never been a better time to be a ArcGIS dev
 Go forth and prosper
