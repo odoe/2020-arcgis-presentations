@@ -12,18 +12,17 @@ Do you have a framework of choice for building apps? Learn how to use various fr
 
 ----
 
-## ArcGIS API Framework Guides
+## [ArcGIS API Framework Guides](https://developers.arcgis.com/javascript/latest/guide/using-frameworks/)
 
 <a href="https://developers.arcgis.com/javascript/latest/guide/using-frameworks/"><img src="img/wayson/jsapi-frameworks-screenshot.png" class="transparent" height="400" /></a>
-
 
 ----
 
 ## ArcGIS
 
-- <!-- .element: class="fragment" --> `Map`
+1. <!-- .element: class="fragment" --> `Map`
   - `basemap`, `portalItem`, ...
-- <!-- .element: class="fragment" --> `View`
+1. <!-- .element: class="fragment" --> `View`
   - `map`
   - `container`
   - ...
@@ -32,10 +31,10 @@ Do you have a framework of choice for building apps? Learn how to use various fr
 
 ## Framework
 
-- <!-- .element: class="fragment" --> global state
-  - router and/or
+1. <!-- .element: class="fragment" --> global state
+  - router
   - store
-- <!-- .element: class="fragment" --> `render(<App>, '#root')`
+1. <!-- .element: class="fragment" --> `render(<App>, '#root')`
   - <!-- .element: style="list-style: none" -->  `<Layout>`
     - <!-- .element: style="list-style: none" --> `<Parent>`
       - <!-- .element: style="list-style: none" --> `<Child>`
@@ -86,25 +85,19 @@ Do you have a framework of choice for building apps? Learn how to use various fr
 
 ## Loading the ArcGIS API
 
+Install with `npm` or `yarn`, then:
+
 ```js
 import Map from 'esri/Map';
 import MapView from 'esri/views/MapView';
-// then later inside the mounted/init...
-const map = new Map({
-    basemap: "streets-navigation-vector"
-});
-const view = new MapView({
-    container: element,
-    map,
-    center: [-118.174, 34.024],
-    zoom: 12
-});
 ```
+
+right? <!-- .element class="fragment" -->
 
 ----
 
 ### 😎 [@arcgis/webpack-plugin](https://github.com/Esri/arcgis-webpack-plugin) 👍
-<p class="fragment">... but</p>
+<p>... but</p>
 <p class="fragment">Must be using webpack 🙄</p>
 <p class="fragment">ArcGIS API 4.7+ only</p>
 <p class="fragment">Must be able to configure webpack</p>
@@ -112,7 +105,7 @@ const view = new MapView({
 ----
 
 <!-- .slide: data-transition="fade" -->
-<p>👵 ArcGIS API < 4.7x? 👴</p>
+<p>👵 ArcGIS API 3.x? 👴</p>
 <p>🚀 CLI blocks access to webpack config? 🔒</p>
 <p>🙈 Don't _want_ to config webpack? 😱</p>
 <div class="fragment">
@@ -157,7 +150,7 @@ const view = new MapView({
   <img src="img/wayson/angular.png" class="transparent" height="120" />
   <img src="img/wayson/vue-logo.png" class="transparent" height="120" />
   <img src="img/wayson/react-js-img.png" class="transparent" height="120" />
-  <img src="img/wayson/Dojo-New.png" class="transparent" height="120" />
+  <img src="img/svelte/svelte-logo.svg" class="transparent" height="120" />
 </div>
 
 ----
