@@ -66,22 +66,6 @@ export default class EsriMap extends Component {
 ----
 
 <!-- .slide: data-transition="fade" -->
-### [Custom Modifiers](https://github.com/ember-modifier/ember-modifier)
+### Demo: [Custom Modifiers](https://github.com/ember-modifier/ember-modifier)
 
-```html
-<div style="height: 400px;" {{webmap @id}}></div>
-```
-
-```js
-// app/modifiers/webmap.js
-import { modifier } from 'ember-modifier';
-import { loadWebMap } from '../utils/map';
-
-export default modifier((element, [id]) => {
-  const view = loadWebMap(element, id);
-  return function cleanUp () {
-    view && view.container = null;
-  };
-});
-```
-<!-- .element class="fragment" -->
+<img src="img/wayson/octane-esri-loader-screenshot.png" height="563">
