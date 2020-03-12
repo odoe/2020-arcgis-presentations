@@ -11,6 +11,8 @@
 
 # Noah
 
+<img src="../common/images/noah.jpg" alt="Where is Noah?">
+
 ----
 
 ### **Agenda**
@@ -237,12 +239,6 @@ const layerList = new LayerList({
 <!-- .slide: data-background="../common/slides/demo.jpg" -->
 
 ### **Demo: Build a TypeScript app from scratch**
-
-----
-
-### **Additional TypeScript Session**
-
-<img style="float:bottom;" src="../common/images/Experience_ArcGISExperienceBuilder.png" alt="ArcGIS Experience Builder: Building Web Solutions, Advanced Topics">
 
 ----
 
