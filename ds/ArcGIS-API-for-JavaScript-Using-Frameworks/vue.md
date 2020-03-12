@@ -65,6 +65,6 @@ export default {
 
 ### Vue Demo
 
-<a href="https://jsapi-map-vue.surge.sh/" target="_blank" rel="noopener">
+<a href="https://github.com/odoe/map-vue" target="_blank" rel="noopener">
   <img alt="Map Vue" src="../common/images/mapvue.png" class="transparent" height="500" />
 </a>
