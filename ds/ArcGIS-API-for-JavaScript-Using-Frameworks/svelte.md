@@ -18,7 +18,7 @@
 
 - Component Framework
 - Reactive (like React or Vue)
-- No compiler! Svelte runs at build time
+- Compiler - Svelte runs at build time
 
 ----
 
