@@ -18,17 +18,17 @@ const view = new MapView({
 
 // Add a legend instance to the panel of a
 // ListItem in a LayerList instance
-const layerList = new LayerList({
-  view,
-  listItemCreatedFunction: event => {
-    const item: esri.ListItem = event.item;
-    if (item.layer.type != "group") {
-      item.panel = {
-        content: "legend",
-        open: true
-      } as esri.ListItemPanel;
-    }
-  }
-});
+// const layerList = new LayerList({
+//   view,
+//   listItemCreatedFunction: event => {
+//     const item: esri.ListItem = event.item;
+//     if (item.layer.type != "group") {
+//       item.panel = {
+//         content: "legend",
+//         open: true
+//       } as esri.ListItemPanel;
+//     }
+//   }
+// });
 // view.ui.add(layerList, "top-right");
 

@@ -139,7 +139,7 @@ npm install --save @types/arcgis-js-api
 
 # Rene
 
-<img src="../common/images/wheres_rene.png" alt="Where is Rene?">
+<img src="../common/images/wheres_rene.png" height="300" alt="Where is Rene?">
 
 ----
 
