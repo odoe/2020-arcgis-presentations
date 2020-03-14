@@ -16,7 +16,6 @@ Learn to build powerful applications that integrate the ArcGIS API for JavaScrip
 
 <a href="https://developers.arcgis.com/javascript/latest/guide/using-frameworks/"><img src="img/wayson/jsapi-frameworks-screenshot.png" class="transparent" height="400" /></a>
 
-
 ----
 <!-- .slide: data-background="./../common/slides/section.jpg" -->
 
@@ -33,55 +32,125 @@ Learn to build powerful applications that integrate the ArcGIS API for JavaScrip
 
 ----
 
-<!-- .slide: data-background="../common/images/ReactArcGISVennDiagram.svg" -->
+## ArcGIS API
 
-
-----
-
-<!-- .slide: data-background="../common/images/ReactArcGISVennDiagram2.svg" -->
-
-----
-
-<!-- .slide: data-background="../common/images/ReactArcGISVennDiagram3.svg" -->
+1. <!-- .element: class="fragment" --> `Map`
+  - `basemap`, `portalItem`, ...
+1. <!-- .element: class="fragment" --> `View`
+  - `map`
+  - `container`
+  - ...
 
 ----
 
-<!-- .slide: data-background="../common/images/ReactMapAppLight.svg" -->
+## React
+
+1. <!-- .element: class="fragment" --> global state
+  - store
+1. <!-- .element: class="fragment" --> `<Provider store={store}>`
+  - <!-- .element: style="list-style: none" -->  `<Router>`
+    - <!-- .element: style="list-style: none" --> `<App>`
+      - <!-- .element: style="list-style: none" --> `<Layout>`
+1. <!-- .element: class="fragment" --> Virtual DOM -> DOM
 
 ----
 
-<!-- .slide: data-background="../common/images/ReactMapAppDark.svg" -->
+## Component as bridge
+
+<div style="display: flex; flex-direction: row; justify-content: space-between">
+  <div>
+    <p><strong>React</strong></p>
+    <ul style="list-style: none;">
+      <li>`<App>`</li>
+      <li>&nbsp;&nbsp;`<Layout>`</li>
+      <li>&nbsp;&nbsp;&nbsp;&nbsp;`<Parent>`</li>
+    </ul>
+  </div>
+  <div>
+    <p style="margin-bottom: 0; margin-top: 8em; font-size: .7em" class="fragment" data-fragment-index="1">props -> state -> render -> ref -></p>
+    <p style="margin: 0">`<MapComponent />`</p>
+    <p style="margin-top: 0; font-size: .7em" class="fragment" data-fragment-index="3"><- state <- callback <- handler</p>
+  </div>
+  <div>
+    <strong>ArcGIS</strong>
+    <div class="fragment" style="font-size: .7em; margin-top: 7em;" data-fragment-index="2">
+      <div>`new Map(properties)`</div>
+      <div>`new MapView`</div>
+      <div>`({ container, map })`</div>
+    </div>
+  </div>
+</div>
 
 ----
 
-<!-- .slide: data-background="../common/images/ReactMapAppDarkComponents.svg" -->
+### Use a [ref](https://reactjs.org/docs/refs-and-the-dom.html) for the `container`
 
-----
+```js
+  constructor(props) {
+    super(props);
+    this.mapRef = React.createRef();
+  }
 
-<!-- .slide: data-background="../common/images/ReactMapAppDarkArcGISCode.svg" -->
-
-----
-
-<!-- .slide: data-background="../common/slides/background.jpg" class="code-md" data-transition="fade" -->
-### Class-based component
-
-```jsx
-render() {
-  return <div ref={this.mapDiv} />;
-}
-componentDidMount() {
-  this._view = createMapView(this.mapDiv.current, this.props.id);
-}
-componentWillUnmount() {
-  !!this._view && this._view.destroy();
-}
+  render() {
+    return (
+      <div className="webmap" ref={this.mapRef} />
+    );
+  }
 ```
 
 ----
 
-## What the hook?
+### Create `Map` and `View` in [`componentDidMount()`](https://reactjs.org/docs/react-component.html#componentdidmount)
 
-Write stateful components using functions instead of classes
+```js
+  componentDidMount() {
+    const map = new ArcGISMap({
+      basemap: 'topo-vector'
+    });
+    this.view = new MapView({
+      container: this.mapRef.current,
+      map: map,
+      center: [-118, 34],
+      zoom: 8
+    });
+  }
+```
+
+----
+
+### Clean up in [`componentWillUnmount()`](https://reactjs.org/docs/react-component.html#componentwillunmount)
+
+```js
+  componentWillUnmount() {
+    if (this.view) {
+      // destroy the map view
+      this.view.container = null;
+    }
+  }
+```
+
+----
+
+### Function Components
+
+`const NameTag = (props) => { <p>{props.name}</p> }`
+
+`<NameTag name="Tom" />`
+
+<ul class="fragment">
+  <li>no way to create refs
+  <li>no access to lifecycle methods
+  <li>no state
+</ul>
+
+----
+
+### What the hook?
+
+Write function components that _use_:
+- refs
+- lifecycle methods
+- state
 
 ----
 
@@ -97,19 +166,54 @@ and [more](https://reactjs.org/docs/hooks-intro.html)!
 
 <!-- .slide: data-background="../common/slides/background.jpg" class="code-md" data-transition="fade"-->
 
-### `useRef`
+### `useRef` for the `container`
 
-Get a reference to a DOM node...
+```jsx
+import React, { useRef, useEffect } from 'react';
 
-```ts
-const elRef = useRef(null);
-// later
-const container = elRef.current
+export const WebMapView = () => {
+  const mapRef = useRef();
+
+  return <div className="webmap" ref={mapRef} />;
+};
 ```
 
-<small class="fragment">
-  ...or _anything_ else that changes outside of React state (view, prev prop values)
-</small>
+----
+
+### `useEffect`
+
+Replaces some class lifecycle methods... mostly
+* `componentDidMount`
+* `componentDidUpdate`
+* `componentWillUnmount`
+
+----
+
+### `useEffect` to create map and view
+
+```jsx
+  const mapRef = useRef();
+  useEffect(
+    () => {
+      // create map and view
+      const map = new ArcGISMap({
+        basemap: 'topo-vector'
+      });
+      const mapView = new MapView({
+        container: mapRef.current,
+        map: map,
+        center: [-118, 34],
+        zoom: 8
+      });
+      return () => {
+        // destroy the map view
+        mapView && mapView.container = null;
+      };
+    }
+  , []); // componentDidMount & componentWillUnmount
+```
+
+... and clean up
 
 ----
 
@@ -117,78 +221,94 @@ const container = elRef.current
 
 ### `useState`
 
-* Manage local state
-* Keep it simple
+Manage local state
 
 ```ts
 const [ready, setReady] = useState(false);
-// later
+// later, maybe after map loads
 setReady(true);
 ```
 
 ----
 
-### `useEffect`
-
-* Replaces some class lifecycle methods... mostly
-  * `componentDidMount`
-  * `componentDidUpdate`
-  * `componentWillUnmount`
-
-----
-
-### Demo: hooks web map component
-
-<a href="https://developers.arcgis.com/javascript/latest/guide/react/"><img height="400" src="img/wayson/web-map-demo-screenshot.png"></a>
-
-----
-
 <!-- .slide: data-background="../common/slides/background.jpg" class="code-md" data-transition="fade"-->
 
-### 🎉 Success! 🎉
+### "Bind" view/map properties to props/state
 
-<p class="fragment">✅ created a map using a ref to React generated DOM</p>
-<p class="fragment">✅ only destroy `MapView` when unmounting</p>
+Hold onto view in state
+
+```ts
+const [view, setView] = useState(null);
+// later in useEffect()
+setView(mapView);
+```
+
+----
+
+<!-- .slide: class="code-md" data-transition="fade"-->
+### "Bind" view/map properties to props/state
+
+Then use another effect to relay changes in props/state
+
+```jsx
+  useEffect(() => {
+    if (!view) {
+      return;
+    }
+    view.zoom = zoom;
+  }, [view, zoom]); // componentDidUpdate
+```
 
 ----
 
 <!-- .slide: data-background="../common/slides/section.jpg" class="code-md" data-transition="fade"-->
-### 🤔 Relay state changes between component and view?
+
+### 🎉 Success! 🎉
+
+<p>✅ created a map using a `ref` to React generated DOM</p>
+<p>✅ only destroy `MapView` when unmounting</p>
+<p>✅ relay changes in `props` (or `state`) to map/view</p>
+<p class="fragment">🤔 Relay changes or events from map/view to React?</p>
 
 ----
 
-<!-- .slide: data-background="img/wayson/React Component and ArcGIS Widget lifecycle-3.png" -->
+<!-- .slide: data-background="../common/slides/section.jpg" class="code-md" data-transition="fade"-->
+### Use another effect to wire up a callback
 
-----
+```jsx
+  useEffect(() => {
+    if (!view) {
+      return;
+    }
+    const handle = view.on('click', callback);
+    return function removeHandle() {
+      handle.remove();
+    };
+  }, [view, callback]); // componentDidUpdate
+```
 
-<!-- .slide: data-background="img/wayson/React Component and ArcGIS Widget lifecycle-4.png" -->
-
-----
-
-<!-- .slide: data-background="img/wayson/React Component and ArcGIS Widget lifecycle-5.png" -->
-
-----
-
-<!-- .slide: data-background="../common/slides/section.jpg"-->
-
-## Demo: Location picker
-
-<img class="transparent" height="400" src="img/wayson/location-picker-screenshot.png">
+use clean-up functions to remove event & watch handlers
 
 ----
 
 <!-- .slide: data-background="../common/slides/background.jpg" -->
 
-### Components that wrap views or widgets
+### Component is key to integration
 
-<small class="fragment">... class-based or hooks 🙂</small>
+<small>... class-based or hooks 🙂</small>
 
-<ul>
-  <li class="fragment">✅ use a `ref` to access the DOM node</li>
-  <li class="fragment">✅ pass parent `state` & `callbacks` to map component via `props`</li>
-  <li class="fragment">✅ use clean-up functions to remove event & watch handlers</li>
-  <li class="fragment">✅ be careful not to destroy the view until unmounting</li>
+<ul style="list-style: none">
+  <li>✅ acts as a bridge between React and ArcGIS</li>
+  <li>✅ use a `ref` to get the view's `container`</li>
+  <li>✅ send React `props` & `state` to map & view properties</li>
+  <li>✅ send changes and events from ArcGIS to React via callbacks</li>
 </li>
+
+----
+
+### [Using the ArcGIS API for JavaScript with React](https://developers.arcgis.com/javascript/latest/guide/react)
+
+<iframe src="https://developers.arcgis.com/javascript/latest/guide/react/" style="width: 600px; height:  600px"></iframe>
 
 ----
 
