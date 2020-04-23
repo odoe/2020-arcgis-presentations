@@ -1,1 +1,2 @@
-Presentation - https://git.io/JvVtP
+- Presentation - https://git.io/JvVtP
+- Recording - https://youtu.be/pYlnlQD882w
